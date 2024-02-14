@@ -123,7 +123,7 @@ const meme10 = new Meme({
 });
 
 
-console.log({"u": process.env.MONGO_URI})
+
 const mongoose = require("mongoose")
 // Connect to your local MongoDB instance
 mongoose.connect(process.env.MONGO_URI, {

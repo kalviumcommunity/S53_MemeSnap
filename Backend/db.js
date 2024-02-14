@@ -1,17 +1,16 @@
 const mongoose = require("mongoose");
 
 let mongoConnection;
-console.log({"u": process.env.MONGO_URI})
-
 
 async function ConnectToDB() {
- 
-
-  const mongoUri = process.env.MONGO_URI;
-
-  mongoConnection = await mongoose.connect(mongoUri);
-
-  console.log('Connected to MongoDB database.');
+  try {
+    const mongoUri = process.env.MONGO_URI;
+    mongoConnection = await mongoose.connect(mongoUri);
+    console.log('Connected to MongoDB database.');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error.message);
+    
+  }
 }
 
 async function stopDatabase() {
@@ -24,6 +23,7 @@ async function stopDatabase() {
 }
 
 function isConnected() {
-  return mongoConnection.readyState === 1;
+  return mongoConnection && mongoConnection.readyState === 1;
 }
+
 module.exports = { ConnectToDB, stopDatabase, isConnected };
