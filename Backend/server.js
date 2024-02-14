@@ -1,11 +1,29 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
+const memeData = require("./data/database")
 
-app.get('/ping', (req, res) => {
-  res.send('pong');
+const { ConnectToDB, stopDatabase, isConnected } = require('./db');
+
+app.use(express.json());
+
+app.get('/data', (req, res) => {
+  res.send(memeData);
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.get('/home', async (req, res) => {
+  const dbStatus = isConnected() ? 'disconnected' : 'connected';
+  res.send({
+    message: 'o_O',
+    database: dbStatus,
+  });
+});
+
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`🚀 server running on PORT: ${port} http://localhost:${port}/`);
+    ConnectToDB()
+  });
+}
+
+module.exports = app;
