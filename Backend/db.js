@@ -1,4 +1,5 @@
-const mongoose  = require("mongoose");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 let mongoConnection;
 
@@ -9,7 +10,7 @@ async function ConnectToDB() {
     console.log('Connected to MongoDB database.');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
-    
+    throw error; // Throw an error to indicate connection failure
   }
 }
 
@@ -26,4 +27,4 @@ function isConnected() {
   return mongoConnection && mongoConnection.readyState === 1;
 }
 
-module.exports = { ConnectToDB, stopDatabase, isConnected };
+module.exports = { ConnectToDB, stopDatabase, isConnected, mongoConnection };
