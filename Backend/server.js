@@ -1,44 +1,32 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-require('dotenv').config();
+// const memedata = require('./data/database');
+const cors = require('cors')
+app.use(cors())
 
 const { ConnectToDB, stopDatabase, isConnected } = require('./db');
-const route = require('./routes/route');
+const router = require('./routes/route');
+app.use(express.json())
 
-app.use(express.json());
+// app.get('/data', (req, res) => {
+//   res.send(memedata)
+// });
 
-// Use the route middleware
-app.use('/', route);
+app.use('/api', router);
 
-// Route to check database connection status
-app.get('/status', (req, res) => {
-  res.send({ database: isConnected() ? 'connected' : 'disconnected' });
+// Updated home route
+app.get('/', async (req, res) => {
+  const dbStatus = isConnected() ? 'disconnected' : 'connected';
+  res.send({
+    message: 'o_O',
+    database: dbStatus,
+  });
 });
 
-// Start the server
 if (require.main === module) {
-  ConnectToDB()
-    .then(() => {
-      app.listen(port, () => {
-        console.log(`Server is running on PORT: ${port}`);
-      });
-    })
-    .catch(error => {
-      console.error('Error connecting to the database:', error);
-    });
+  app.listen(port, () => {
+    console.log(`🚀 server running on PORT: ${port} http://localhost:${port}/`);
+    ConnectToDB()
+  });
 }
-
-// Gracefully stop the database connection on process termination
-process.on('SIGINT', async () => {
-  try {
-    await stopDatabase();
-    console.log('Database connection closed.');
-    process.exit(0);
-  } catch (error) {
-    console.error('Error stopping the database:', error);
-    process.exit(1);
-  }
-});
-
-module.exports = app;

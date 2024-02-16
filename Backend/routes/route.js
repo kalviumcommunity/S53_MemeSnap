@@ -1,51 +1,45 @@
-const express = require('express');
-const router = express.Router();
-const Meme = require("../data/schema"); // Import your Meme schema
+const express = require('express')
+const mongoose = require('mongoose')
+const memeModel = require('../data/schema')
+const router = express.Router()
+require("dotenv").config()
 
-// Read data
-router.get('/', async (req, res) => {
-    try {
-        const data = await Meme.find({});
-        res.json({ msg: true, data: data });
-    } catch (error) {
-        res.status(500).json({ msg: false, error: error.message });
-    }
+
+//read
+router.get('/data',async (req,res)=>{
+    const data = await memeModel.find({})
+    res.json({msg : true , data : data})
+})
+
+// create data 
+router.post("/create",async (req,res)=>{
+    console.log(req.body)
+    const data = new memeModel(req.body)
+    await data.save()
+    res.send({message : "data saved successfully"})
+})
+
+
+// update data 
+router.put("/update/:_id", async (req, res) => {
+    let _id = req.params._id;
+    let meme_id = req.body.memeId;
+    let title = req.body.memeTitle;
+    let tags = req.body.tags;
+    const data = await memeModel.findOneAndUpdate({_id: _id}, { memeId: meme_id, memeTitle: title, tags: tags});
+    console.log(data);
+    res.send({msg : true , message : "Data updated successfully"});
 });
 
-// Create data
-router.post("/create", async (req, res) => {
-    try {
-        console.log(req.body);
-        const data = new Meme(req.body);
-        await data.save();
-        res.send({ msg: true, message: "data saved successfully" });
-    } catch (error) {
-        res.status(500).json({ msg: false, error: error.message });
-    }
-});
 
-// Update data
-router.put("/update/:postId", async (req, res) => {
-    try {
-        let postId = req.params.postId;
-        let newData = req.body.Title;
-        const data = await Meme.findOneAndUpdate({ postId: postId }, { Title: newData });
-        res.send({ msg: true, message: "data updated successfully" });
-    } catch (error) {
-        res.status(500).json({ msg: false, error: error.message });
-    }
-});
+//delete data
+router.delete("/delete/:_id",async (req,res)=>{
+    const id  = req.params._id
+    console.log(id)
+    const data = await memeModel.deleteOne({_id : id})
+    console.log(data);
+    res.send({msg : true , message : "data deleted successfully"})
 
-// Delete data
-router.delete("/delete/:id", async (req, res) => {
-    try {
-        const id = req.params.id;
-        console.log(id);
-        const data = await Meme.deleteOne({ _id: id });
-        res.send({ msg: true, message: "data deleted successfully" });
-    } catch (error) {
-        res.status(500).json({ msg: false, error: error.message });
-    }
-});
+})
 
 module.exports = router;
