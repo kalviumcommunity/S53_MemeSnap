@@ -10,4 +10,5 @@ const memeSchema = new Schema({
     tags: String
 })
 
-module.exports = mongoose.model("Meme", memeSchema) //Exporting model of the schema
+const memeModel = new mongoose.model("meme_entities", memeSchema)
+module.exports =  memeModel; //Exporting model of the schema
