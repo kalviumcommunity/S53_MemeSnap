@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const memeSchema = new Schema({
     memeId: {type: Number, required: true},
     memeTitle: {type: String, required: true},
+    user: {type: String, required:true},
     image: String,
     likes: Number,
     comments: Array,
