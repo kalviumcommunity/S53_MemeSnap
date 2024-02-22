@@ -21,7 +21,8 @@
             { "user": "Sandy", "comment": "Haha, classic SpongeBob!" },
             { "user": "Patrick", "comment": "I don't get it..." }
         ],
-        "tags": "Pop culture"
+        "tags": "Pop culture",
+        "user": "Subham243"
         },
         {
         "memeId": 3,
@@ -32,7 +33,8 @@
             { "user": "CatLover123", "comment": "Aww, so cute!" },
             { "user": "DogPerson456", "comment": "Why can't dogs sleep this peacefully?" }
         ],
-        "tags": "Animals and Pets"
+        "tags": "Animals and Pets",
+        "user": "Subham243"
         },
         {
         "memeId": 4,
@@ -43,7 +45,8 @@
             { "user": "PizzaLover", "comment": "Pizza always comes first!" },
             { "user": "HealthNut", "comment": "But what about salads?" }
         ],
-        "tags": "Food"
+        "tags": "Food",
+        "user": "Subham243"
         },
         {
         "memeId": 5,
@@ -54,7 +57,8 @@
             { "user": "TechGuru", "comment": "This is so accurate!" },
             { "user": "User123", "comment": "Why is it always like this?" }
         ],
-        "tags": "Technology"
+        "tags": "Technology",
+        "user": "Subham243"
         },
         {
         "memeId": 6,
@@ -65,7 +69,8 @@
             { "user": "GamerGirl", "comment": "Story of my life!" },
             { "user": "NoobPlayer", "comment": "I don't get it..." }
         ],
-        "tags": "Gaming"
+        "tags": "Gaming",
+        "user": "Subham243"
         },
         {
         "memeId": 7,
@@ -76,7 +81,8 @@
             { "user": "LoveBird", "comment": "Story of my relationship!" },
             { "user": "SingleLife", "comment": "Why can't I relate?" }
         ],
-        "tags": "Relationships"
+        "tags": "Relationships",
+        "user": "Subham243"
         },
         {
         "memeId": 8,
@@ -87,7 +93,8 @@
             { "user": "SportsFanatic", "comment": "Ouch, that's gotta hurt!" },
             { "user": "Athlete123", "comment": "Been there, done that..." }
         ],
-        "tags": "Sports"
+        "tags": "Sports",
+        "user": "Subham243"
         },
         {
         "memeId": 9,
@@ -98,7 +105,8 @@
             { "user": "NerdLife", "comment": "Always running late!" },
             { "user": "TeacherPet", "comment": "I never miss a class!" }
         ],
-        "tags": "School"
+        "tags": "School",
+        "user": "Subham243"
         },
         {
         "memeId": 10,
@@ -109,6 +117,7 @@
             { "user": "OfficeWorker", "comment": "Every. Single. Meeting." },
             { "user": "CEO123", "comment": "Can we make these more productive?" }
         ],
-        "tags": "Corporate"
+        "tags": "Corporate",
+        "user": "Subham243"
         }
     ]
