@@ -7,7 +7,7 @@ require("dotenv").config()
 
 //read
 router.get('/data',async (req,res)=>{
-    const data = await memeModel.find({})
+    const data = await memeModel.find()
     res.json({msg : true , data : data})
 })
 
