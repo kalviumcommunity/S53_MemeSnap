@@ -184,7 +184,7 @@
 }
 
 .layer-1:hover{
-    filter: brightness(65%);
+    filter: blur(1px) brightness(50%);
 }
 .details-1{
     padding-left: 20px;
