@@ -270,10 +270,10 @@
     z-index: 5;
     background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
 }
+
 .modal-content{
     background-color: #fff;
     font-family: "Inter", sans-serif;
-    font-weight: 500;
     height: 480px;
     width: 350px;
     border-radius: 28px;
@@ -326,4 +326,84 @@
     font-family: "Inter", sans-serif;
     background-color: #0071E3;
     color: #fff;
+}
+
+.meme-content{
+    background-color: #fff;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    height: 540px;
+    width: 820px;
+    border-radius: 48px;
+}
+
+.meme-close{
+    translate: 780px -15px;
+    cursor: pointer;
+    filter: drop-shadow(0 0 0.45rem rgba(0, 0, 0, 0.25));
+}
+
+.meme-content{
+    display: flex;
+}
+
+.left, .right{
+    margin-top: 60px;
+}
+
+.right{
+    margin-left: 40px;
+    width: 440px;
+}
+
+.line-1{
+    display: flex;
+    justify-content: space-between;
+}
+
+.line-2{
+    margin-top: -35px;
+    margin-bottom: 55px;
+}
+
+.share{
+    margin-top: -38px;
+    display: flex;
+    align-self: center;
+}
+.share-btn{
+    background-color: transparent;
+    color: #0071E3;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+.meme-modal-heading p{
+    font-size: 36px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    color: #282828;
+}
+.meme-modal-heading{
+    margin-top: -35px;
+}
+.line-2 p{
+    color: #808080;
+    font-weight: 400;
+}
+.comment{
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+}
+.comment-input{
+    background-color: #e4e4e4;
+    height: 35px;
+    border-radius: 14px;
+    width: 440px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
 }
