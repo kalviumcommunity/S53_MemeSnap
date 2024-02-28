@@ -25,8 +25,10 @@ router.put("/update/:_id", async (req, res) => {
     let _id = req.params._id;
     let meme_id = req.body.memeId;
     let title = req.body.memeTitle;
+    let meme_user = req.body.user;
+    let meme_img = req.body.image;
     let tags = req.body.tags;
-    const data = await memeModel.findOneAndUpdate({_id: _id}, { memeId: meme_id, memeTitle: title, tags: tags});
+    const data = await memeModel.findOneAndUpdate({_id: _id}, { memeId: meme_id, memeTitle: title, user: meme_user, image: meme_img, tags: tags});
     console.log(data);
     res.send({msg : true , message : "Data updated successfully"});
 });
