@@ -46,7 +46,7 @@ const Mainpage = () => {
     useEffect(() => {
         const fetchMemes = async () => {
             try {
-                const response = await axios.get("https://memesnap.onrender.com//api/data");
+                const response = await axios.get("https://memesnap.onrender.com/api/data");
                 setMemes(response.data.data);
             } catch (error) {
                 console.log("error: ", error);
