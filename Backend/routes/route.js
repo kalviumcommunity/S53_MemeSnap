@@ -1,9 +1,20 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const memeModel = require('../data/schema')
+const joi_model = require('../joi')
 const router = express.Router()
 require("dotenv").config()
 
+const Joi_schema= ((req,res,next)=>{
+    const { error } = joi_model.validate(req.body,{
+        abortEarly:false,
+    });
+    if(error){
+        res.status(400).send(error.details)
+    }
+    res.send("data send successfully")
+    next()
+})
 
 //read
 router.get('/data',async (req,res)=>{
@@ -12,7 +23,7 @@ router.get('/data',async (req,res)=>{
 })
 
 // create data 
-router.post("/create",async (req,res)=>{
+router.post("/create",Joi_schema, async (req,res)=>{
     console.log(req.body)
     const data = new memeModel(req.body)
     await data.save()
@@ -21,7 +32,7 @@ router.post("/create",async (req,res)=>{
 
 
 // update data 
-router.put("/update/:_id", async (req, res) => {
+router.put("/update/:_id", Joi_schema, async (req, res) => {
     let _id = req.params._id;
     let meme_id = req.body.memeId;
     let title = req.body.memeTitle;
@@ -35,7 +46,7 @@ router.put("/update/:_id", async (req, res) => {
 
 
 //delete data
-router.delete("/delete/:_id",async (req,res)=>{
+router.delete("/delete/:_id", async (req,res)=>{
     const id  = req.params._id
     console.log(id)
     const data = await memeModel.deleteOne({_id : id})
