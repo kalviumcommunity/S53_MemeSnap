@@ -12,8 +12,10 @@ const Joi_schema= ((req,res,next)=>{
     if(error){
         res.status(400).send(error.details)
     }
-    res.send("data send successfully")
-    next()
+    else{
+        next()
+    }
+
 })
 
 //read
