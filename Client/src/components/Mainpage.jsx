@@ -46,7 +46,7 @@ const Mainpage = () => {
     useEffect(() => {
         const fetchMemes = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/data");
+                const response = await axios.get("https://memesnap.onrender.com/api/data");
                 setMemes(response.data.data);
             } catch (error) {
                 console.log("error: ", error);
@@ -106,10 +106,10 @@ const Mainpage = () => {
             };
 
             // Send POST request to create new meme
-            await axios.post("http://localhost:3000/api/create", newMeme);
+            await axios.post("https://memesnap.onrender.com/api/create", newMeme);
 
             // Refresh memes after creation
-            const response = await axios.get("http://localhost:3000/api/data");
+            const response = await axios.get("https://memesnap.onrender.com/api/data");
             setMemes(response.data.data);
 
             closeModal();
@@ -129,10 +129,10 @@ const Mainpage = () => {
             };
 
             // Send PUT request to update a meme
-            await axios.put(`http://localhost:3000/api/update/${selectedMeme._id}`, updatedMeme);
+            await axios.put(`https://memesnap.onrender.com/api/update/${selectedMeme._id}`, updatedMeme);
 
             // Refresh memes after creation
-            const response = await axios.get("http://localhost:3000/api/data");
+            const response = await axios.get("https://memesnap.onrender.com/api/data");
             setMemes(response.data.data);
 
             closeEdit();
