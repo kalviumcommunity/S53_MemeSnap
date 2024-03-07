@@ -14,7 +14,7 @@ function Login() {
     console.log('Logged In:', { email, password });
     setCookie('email', email, { path: '/' });
     try{
-      const response = await axios.post("http://localhost:3000/api/auth/Login", {email, password})
+      const response = await axios.post("https://memesnap.onrender.com/api/auth/Login", {email, password})
       console.log(response.data.message);
       location.href = "/Mainpage"
     }

@@ -17,7 +17,7 @@ function Register() {
       };
 
       // Send POST request to create new user
-      await axios.post("http://localhost:3000/api/Register", newUser);
+      await axios.post("https://memesnap.onrender.com/api/Register", newUser);
 
   } catch (error) {
       console.log("error: ", error);
