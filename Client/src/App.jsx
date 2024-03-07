@@ -1,10 +1,10 @@
-// import CardDetails from './components/CardDetails'
-// import Edit from './components/Edit'
+import React , { useState } from "react"
 import Homepage from './components/Homepage'
 import Mainpage from './components/Mainpage'
-import Navbar from './components/Navbar'
-// import NewPost from './components/NewPost'
 import { Route, Routes } from 'react-router-dom'
+import Login from "./components/Login"
+import Register from "./components/Register"
+
 import './App.css'
 
 function App() {
@@ -13,12 +13,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage/>}/>
           <Route path='/Mainpage' element={<Mainpage/>}/>
-          {/* <Route path='/Mainpage/new' element= {<NewPost />} />
-          <Route path="/Mainpage/details/:id" element={<CardDetails/>} />
-          <Route path="/Mainpage/edit/:id" element={<Edit/>} /> */}
+          <Route path='/Login' element={<Login/>}/>
+          <Route path='/Register' element={<Register/>}/>
         </Routes>
     </div>
-    
   )
 }
 

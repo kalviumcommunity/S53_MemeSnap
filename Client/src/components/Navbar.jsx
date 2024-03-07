@@ -4,6 +4,12 @@ import "../App.css"
 import { Link } from "react-router-dom"
 
 const Navbar = () => {
+  const deleteCookie = () =>{
+    document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // Replace "your_cookie_name" with the name of your cookie
+    setCookieDeleted(true);
+    alert("Cookie deleted!");
+  }
   return (
     <>
       <div className='navbar'>
@@ -13,10 +19,13 @@ const Navbar = () => {
           </div>
           <div className='user-action'>
             <div className='login'>
-              <button className='login-btn'>Login</button>
+            <Link to="/Login" style={{textDecoration:"None"}}><button className='login-btn'>Login</button></Link>
             </div>
             <div className='signup'>
-              <button className='signup-btn'>Sign up</button>
+            <Link to="/Register" style={{textDecoration:"None"}}><button className='signup-btn'>Register</button></Link>
+            </div>
+            <div className='logout'>
+            <Link to="/Logout" onClick={deleteCookie} style={{textDecoration:"None"}}><button className='logout-btn'>Log-out</button></Link>
             </div>
           </div>
         </nav>
