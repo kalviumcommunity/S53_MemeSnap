@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const memeModel = require('../data/schema')
 const userModel = require('../data/userschema')
 const joi_model = require('../joi')
+const jwt = require('jsonwebtoken')
 const router = express.Router()
 require("dotenv").config()
 const Joi_schema= ((req,res,next)=>{
@@ -29,24 +30,16 @@ router.post('/Register', async (req,res)=>{
 router.post('/auth/Login', async (req,res)=>{
     const { email, password }  = req.body;
     console.log(email, password)
-    try {
         const user = await userModel.findOne({ email });
-    
         if (!user) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
-        
         const isPasswordValid = user.comparePassword(password);
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
-
-        res.status(200).json({ message: 'Login successful'});
-        
-    } catch (err) {
-        console.error('Error:', err);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY);
+        res.json({ token, userID: user._id});
 })
 
 router.delete("/auth/logout/:_id", async (req,res)=>{

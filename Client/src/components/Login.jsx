@@ -6,16 +6,16 @@ import axios from 'axios';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [cookies, setCookie] = useCookies(['']);
+  const [cookies, setCookie] = useCookies(["access_token"]);
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Logged In:', { email, password });
-    setCookie('email', email, { path: '/' });
     try{
       const response = await axios.post("https://memesnap.onrender.com/api/auth/Login", {email, password})
-      console.log(response.data.message);
+      console.log(response);
+      setCookie("access_token", response.data.token);
       location.href = "/Mainpage"
     }
     catch(err){
