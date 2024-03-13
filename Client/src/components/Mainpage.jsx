@@ -15,6 +15,9 @@ const Mainpage = () => {
     const [memes, setMemes] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedMeme, setSelectedMeme] = useState(null);
+    const [filteredMemes, setFilteredMemes] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [selectedUser, setSelectedUser] = useState("");
     const [imageLink, setImageLink] = useState('');
     const [description, setDescription] = useState('');
     const [user, setUser] = useState('');
@@ -54,6 +57,19 @@ const Mainpage = () => {
         };
         fetchMemes();
     }, []);
+    
+    useEffect(() => {
+        if (selectedUser !== "") {
+            const filtered = memes.filter(meme => meme.user === selectedUser);
+            setFilteredMemes(filtered);
+        } else {
+            setFilteredMemes(memes);
+        }
+    }, [selectedUser, memes]);
+
+    const handleUserSelect = (event) => {
+        setSelectedUser(event.target.value);
+    };
 
     const MemeCard = ({ meme }) => {
         const [isHovering, setIsHovering] = useState(false);
@@ -145,6 +161,12 @@ const Mainpage = () => {
         <>
             <div className='container'>
                 <Navbar />
+                <select onChange={handleUserSelect}>
+                    <option value="">All Users</option>
+                    {users.map((user, index) => (
+                        <option key={index} value={user}>{user}</option>
+                    ))}
+                </select>
                 <div className='add'>
                     <button className='create' onClick={openModal}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

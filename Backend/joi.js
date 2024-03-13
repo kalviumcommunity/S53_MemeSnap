@@ -6,7 +6,8 @@ const joi_model = joi.object({
     image: joi.string(),
     likes: joi.number(),
     comments: joi.array(),
-    tags: joi.string()
+    tags: joi.string(),
+    username: joi.string()
 });
 
 module.exports = joi_model;

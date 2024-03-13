@@ -8,7 +8,8 @@ const memeSchema = new Schema({
     image: String,
     likes: Number,
     comments: Array,
-    tags: String
+    tags: String,
+    username: String
 })
 
 const memeModel = new mongoose.model("meme_entities", memeSchema)
