@@ -15,8 +15,6 @@ const Mainpage = () => {
     const [memes, setMemes] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedMeme, setSelectedMeme] = useState(null);
-    const [filteredMemes, setFilteredMemes] = useState([]);
-    const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState("");
     const [imageLink, setImageLink] = useState('');
     const [description, setDescription] = useState('');
@@ -25,6 +23,8 @@ const Mainpage = () => {
     const [updatedImageLink, setUpdatedImageLink] = useState('');
     const [updatedDescription, setUpdatedDescription] = useState('');
     const [updatedUser, setUpdatedUser] = useState('');
+    const [filter, setFilter] = useState([]);
+    const [list, setList] = useState('');
 
     function renderRow(props) {
         const { index, style } = props;
@@ -58,18 +58,23 @@ const Mainpage = () => {
         fetchMemes();
     }, []);
     
-    useEffect(() => {
-        if (selectedUser !== "") {
-            const filtered = memes.filter(meme => meme.user === selectedUser);
-            setFilteredMemes(filtered);
-        } else {
-            setFilteredMemes(memes);
-        }
-    }, [selectedUser, memes]);
-
-    const handleUserSelect = (event) => {
-        setSelectedUser(event.target.value);
-    };
+        useEffect(() => {
+                    axios.get("http://localhost:3000/api/Register").then(
+                        res=>{
+                            if (res.data && res.data.user && res.data.user.length > 0){
+                                const usernames = res.data.user.map(users => users.username);
+                                const uniqueUsernames = [... new Set(usernames)];
+                                setFilter(uniqueUsernames);
+                            }
+                            else{
+                                console.log("Invalid response format");
+                            }
+                        }
+                    )
+                    .catch(err =>{
+                        console.log("Error fetching data");
+                    });
+    }, []);
 
     const MemeCard = ({ meme }) => {
         const [isHovering, setIsHovering] = useState(false);
@@ -79,13 +84,13 @@ const Mainpage = () => {
 
         return (
             <div className="meme-card" key={meme._id} onClick={openMeme}>
-                <div className='layer-1' onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
-                    <img className="meme-image" src={meme.image} alt="Meme"/>
-                </div>
-                <div className='details-1' style={{ display: isHovering ? 'block' : 'none' }}>
-                    <p className='username'>@{meme.user}</p>
-                    <p className="title">{meme.memeTitle}</p>
-                </div>
+                            <div className='layer-1' onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+                                <img className="meme-image" src={meme.image} alt="Meme" />
+                            </div>
+                            <div className='details-1' style={{ display: isHovering ? 'block' : 'none' }}>
+                                <p className='username'>@{meme.user}</p>
+                                <p className="title">{meme.memeTitle}</p>
+                            </div>
             </div>
         );
     };
@@ -156,16 +161,20 @@ const Mainpage = () => {
             console.log("error: ", error);
         }
     };
+    const handleFilter = (e) =>{
+        setList(e.target.value);
+    }
 
+    console.log(filter);
     return (
         <>
             <div className='container'>
                 <Navbar />
-                <select onChange={handleUserSelect}>
-                    <option value="">All Users</option>
-                    {users.map((user, index) => (
-                        <option key={index} value={user}>{user}</option>
-                    ))}
+                <select value={list} onChange={handleFilter}>
+                    <option value="">All users</option>
+                        {filter.map(username => (
+                            <option key={username} value={username}>{username}</option>
+                        ))}
                 </select>
                 <div className='add'>
                     <button className='create' onClick={openModal}>
@@ -195,7 +204,9 @@ const Mainpage = () => {
                 </div>
             </div>
             <div className='meme-container'>
-                {memes.map((meme) => (
+            {memes
+                .filter(meme => !list || meme.user === list) // Filter memes based on selected user
+                .map((meme) => (
                     <MemeCard key={meme._id} meme={meme}/>
                 ))}
             </div>

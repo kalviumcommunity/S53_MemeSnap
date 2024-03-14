@@ -19,6 +19,12 @@ const Joi_schema= ((req,res,next)=>{
 
 })
 
+//Register get
+router.get('/Register',async (req,res)=>{
+    const data = await userModel.find()
+    res.json({user: data});
+})
+
 //Register
 router.post('/Register', async (req,res)=>{
     console.log(req.body)
